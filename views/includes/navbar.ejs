@@ -1,16 +1,73 @@
 <nav class="navbar navbar-expand-lg bg-body-light border-bottom sticky-top">
     <div class="container-fluid">
       <a class="navbar-brand" href="/"><i class="fa-solid fa-compass"></i></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+              data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" 
+              aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+      <div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
+
+        <!-- LEFT SIDE NAVIGATION -->
         <div class="navbar-nav">
           <a class="nav-link active" href="/">Home</a>
           <a class="nav-link" href="/listings">All Listings</a>
           <a class="nav-link" href="/listings/new">Add new Listings</a>
-          
+
+          <% if (!currentUser) { %>
+              <a class="nav-link" href="/login">Login</a>
+              <a class="nav-link" href="/signup">Signup</a>
+          <% } else { %>
+              <a class="nav-link" href="/logout">Logout</a>
+          <% } %>
+        </div>
+
+        <!-- RIGHT SIDE SECTION -->
+        <div class="d-flex gap-3 align-items-center">
+
+            <!-- WEATHER WIDGET -->
+            <div>
+                <input id="cityInput" type="text" placeholder="City" 
+                       style="width:100px; font-size:12px; padding:2px;">
+                <button class="btn btn-sm btn-outline-primary" onclick="loadWeather()">☁</button>
+
+                <div id="weatherResult" style="font-size:12px; line-height:1;">
+                    <span id="temp"></span><br>
+                    <span id="condition"></span><br>
+                    <span id="suggestion"></span>
+                </div>
+            </div>
+
+            <!-- TRAVEL COST ESTIMATOR -->
+            <div>
+                <input id="from" type="text" placeholder="From" 
+                       style="width:80px; font-size:12px; padding:2px;">
+                <input id="to" type="text" placeholder="To" 
+                       style="width:80px; font-size:12px; padding:2px;">
+
+                <select id="mode" style="font-size:12px; padding:2px;">
+                    <option value="car">Car</option>
+                    <option value="bike">Bike</option>
+                    <option value="bus">Bus</option>
+                    <option value="train">Train</option>
+                    <option value="flight">Flight</option>
+                </select>
+
+                <button class="btn btn-sm btn-success" onclick="getCost()">₹</button>
+
+                <div id="travelResult" style="font-size:12px;">
+                    <span id="distance"></span><br>
+                    <span id="cost"></span>
+                </div>
+            </div>
+
         </div>
       </div>
     </div>
-  </nav>
+</nav>
+
+<!-- Weather + Travel JS -->
+<script src="/js/weather.js"></script>
+<script src="/js/travel.js"></script>
