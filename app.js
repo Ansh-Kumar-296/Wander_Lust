@@ -76,11 +76,11 @@ app.get("/", (req, res) => {
     res.render("listings/home.ejs");
 });
 
-const weatherRoute = require("./routes/weather");
-app.use("/weather", weatherRoute);
+// const weatherRoute = require("./routes/weather");
+// app.use("/weather", weatherRoute);
 
-const travelRoute = require("./routes/travel");
-app.use("/travel", travelRoute);
+// const travelRoute = require("./routes/travel");
+// app.use("/travel", travelRoute);
 
 
 app.listen(8080, () => {
